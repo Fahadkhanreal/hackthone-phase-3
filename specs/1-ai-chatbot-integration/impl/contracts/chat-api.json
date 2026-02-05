@@ -1,0 +1,122 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Todo AI Chatbot API",
+    "version": "1.0.0",
+    "description": "API for interacting with the AI chatbot for task management"
+  },
+  "paths": {
+    "/api/{user_id}/chat": {
+      "post": {
+        "summary": "Send a message to the AI chatbot",
+        "description": "Processes a user message through the AI chatbot and returns a response with any tool calls executed",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "ID of the user making the request (must match JWT token)"
+          }
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message"],
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "description": "The user's message to send to the chatbot"
+                  },
+                  "conversation_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Optional conversation ID to continue an existing conversation",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response from the chatbot",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["conversation_id", "response"],
+                  "properties": {
+                    "conversation_id": {
+                      "type": "string",
+                      "format": "uuid",
+                      "description": "ID of the conversation (newly created or existing)"
+                    },
+                    "response": {
+                      "type": "string",
+                      "description": "The chatbot's response to the user's message"
+                    },
+                    "tool_calls": {
+                      "type": "array",
+                      "description": "Any tool calls that were executed as a result of the message",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "Name of the tool that was called"
+                          },
+                          "arguments": {
+                            "type": "object",
+                            "description": "Arguments passed to the tool"
+                          },
+                          "result": {
+                            "type": "object",
+                            "description": "Result returned by the tool"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or expired JWT token"
+          },
+          "403": {
+            "description": "Forbidden - user_id in path does not match JWT token"
+          },
+          "404": {
+            "description": "Not Found - Conversation ID provided does not exist or belong to user"
+          },
+          "500": {
+            "description": "Internal Server Error - Error occurred during processing"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

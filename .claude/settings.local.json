@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"\nfrom src.config.settings import settings\nfrom src.database.engine import engine, get_async_session\nfrom src.database.models.task import Task, TaskCreate, TaskRead\nfrom src.api.routes.health import router\nprint\\(''All imports successful''\\)\n\")"
+    ]
+  }
+}

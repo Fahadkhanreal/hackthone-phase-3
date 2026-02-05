@@ -1,0 +1,55 @@
+openapi: 3.0.3
+info:
+  title: Neon Database Connection Health API
+  description: Health check API for verifying Neon database connection
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Development server
+paths:
+  /health:
+    get:
+      summary: Health check endpoint
+      description: Verifies database connectivity and overall system health
+      responses:
+        '200':
+          description: System is healthy and database connection is established
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [healthy]
+                    description: Current system status
+                    example: healthy
+                  database:
+                    type: string
+                    enum: [connected]
+                    description: Database connection status
+                    example: connected
+                required:
+                  - status
+                  - database
+        '500':
+          description: Internal server error due to database connection issues
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [error]
+                    description: Current system status
+                    example: error
+                  detail:
+                    type: string
+                    description: Error message describing the issue
+                    example: Connection failed to database
+                required:
+                  - status
+                  - detail
+components:
+  schemas: {}

@@ -1,0 +1,211 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Todo AI Chatbot MCP Tools",
+    "version": "1.0.0",
+    "description": "MCP tools for managing tasks through natural language AI chatbot"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "AddTaskParams": {
+        "type": "object",
+        "required": ["user_id", "title"],
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "ID of the user making the request"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Title of the task to add"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1000,
+            "description": "Optional description of the task",
+            "nullable": true
+          }
+        }
+      },
+      "AddTaskResult": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "ID of the created task"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["created"],
+            "description": "Status of the operation"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the created task"
+          }
+        }
+      },
+      "ListTasksParams": {
+        "type": "object",
+        "required": ["user_id"],
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "ID of the user making the request"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["all", "pending", "completed"],
+            "default": "all",
+            "description": "Filter tasks by completion status"
+          }
+        }
+      },
+      "ListTasksResult": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid",
+              "description": "ID of the task"
+            },
+            "title": {
+              "type": "string",
+              "description": "Title of the task"
+            },
+            "completed": {
+              "type": "boolean",
+              "description": "Completion status of the task"
+            }
+          }
+        }
+      },
+      "CompleteTaskParams": {
+        "type": "object",
+        "required": ["user_id", "task_id"],
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "ID of the user making the request"
+          },
+          "task_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "ID of the task to complete"
+          }
+        }
+      },
+      "CompleteTaskResult": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "ID of the completed task"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["completed"],
+            "description": "Status of the operation"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the completed task"
+          }
+        }
+      },
+      "DeleteTaskParams": {
+        "type": "object",
+        "required": ["user_id", "task_id"],
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "ID of the user making the request"
+          },
+          "task_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "ID of the task to delete"
+          }
+        }
+      },
+      "DeleteTaskResult": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "ID of the deleted task"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["deleted"],
+            "description": "Status of the operation"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the deleted task"
+          }
+        }
+      },
+      "UpdateTaskParams": {
+        "type": "object",
+        "required": ["user_id", "task_id"],
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "ID of the user making the request"
+          },
+          "task_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "ID of the task to update"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "New title for the task",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1000,
+            "description": "New description for the task",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateTaskResult": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "ID of the updated task"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["updated"],
+            "description": "Status of the operation"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the updated task"
+          }
+        }
+      }
+    }
+  }
+}
