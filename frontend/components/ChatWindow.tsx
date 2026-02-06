@@ -110,7 +110,7 @@ export default function ChatWindow({ isOpen, onClose, userId }: ChatWindowProps)
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl shadow-2xl border border-gray-700 flex flex-col z-50 overflow-hidden">
+    <div className="fixed bottom-24 right-6 w-full max-w-md h-[500px] sm:h-[600px] bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl shadow-2xl border border-gray-700 flex flex-col z-50 overflow-hidden">
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-4 rounded-t-xl flex justify-between items-center">
         <h3 className="font-semibold text-lg flex items-center">
@@ -126,21 +126,21 @@ export default function ChatWindow({ isOpen, onClose, userId }: ChatWindowProps)
       </div>
 
       {/* Messages container */}
-      <div className="flex-1 overflow-y-auto p-4 bg-gradient-to-b from-gray-900 to-gray-800">
+      <div className="flex-1 overflow-y-auto p-4 bg-gradient-to-b from-gray-900 to-gray-800 chat-messages-container">
         {messages.length === 0 ? (
-          <div className="text-center text-gray-300 mt-8">
+          <div className="text-center text-gray-300 mt-4 sm:mt-8">
             <div className="text-4xl mb-4">👋</div>
             <p className="text-lg font-medium mb-2">Hello! I'm your AI task assistant.</p>
             <p className="mb-4">How can I help you today?</p>
-            <div className="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
-              <p className="font-medium mb-2 text-blue-300">Try these commands:</p>
-              <ul className="text-sm space-y-1 text-left">
-                <li className="flex items-start"><span className="text-green-400 mr-2">•</span>Add tasks: "Add a task: Buy groceries"</li>
-                <li className="flex items-start"><span className="text-green-400 mr-2">•</span>List tasks: "Show my tasks"</li>
-                <li className="flex items-start"><span className="text-green-400 mr-2">•</span>Complete tasks: "Complete task 1"</li>
-                <li className="flex items-start"><span className="text-green-400 mr-2">•</span>Update tasks: "Update task 1"</li>
-                <li className="flex items-start"><span className="text-green-400 mr-2">•</span>Delete tasks: "Delete task 1"</li>
-                <li className="flex items-start"><span className="text-green-400 mr-2">•</span>Ask: "Who am I?"</li>
+            <div className="bg-gray-800/50 p-3 sm:p-4 rounded-lg border border-gray-700">
+              <p className="font-medium mb-2 text-blue-300 text-sm sm:text-base">Try these commands:</p>
+              <ul className="text-xs sm:text-sm space-y-1 text-left">
+                <li className="flex items-start"><span className="text-green-400 mr-2 text-xs">•</span>Add tasks: "Add a task: Buy groceries"</li>
+                <li className="flex items-start"><span className="text-green-400 mr-2 text-xs">•</span>List tasks: "Show my tasks"</li>
+                <li className="flex items-start"><span className="text-green-400 mr-2 text-xs">•</span>Complete tasks: "Complete task 1"</li>
+                <li className="flex items-start"><span className="text-green-400 mr-2 text-xs">•</span>Update tasks: "Update task 1"</li>
+                <li className="flex items-start"><span className="text-green-400 mr-2 text-xs">•</span>Delete tasks: "Delete task 1"</li>
+                <li className="flex items-start"><span className="text-green-400 mr-2 text-xs">•</span>Ask: "Who am I?"</li>
               </ul>
             </div>
           </div>
@@ -155,7 +155,7 @@ export default function ChatWindow({ isOpen, onClose, userId }: ChatWindowProps)
                     : 'bg-gradient-to-r from-gray-700/50 to-gray-800/50 mr-auto border border-gray-600/30 backdrop-blur-sm'
                 }`}
               >
-                <div className="text-gray-100 text-sm">{message.content}</div>
+                <div className="text-gray-100 text-sm sm:text-base">{message.content}</div>
                 <div className="text-xs text-gray-400 mt-1">
                   {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </div>
@@ -188,6 +188,7 @@ export default function ChatWindow({ isOpen, onClose, userId }: ChatWindowProps)
             placeholder="Ask me to manage your tasks..."
             className="flex-1 bg-gray-700 text-white border border-gray-600 rounded-l-lg p-3 resize-none h-12 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
             disabled={isLoading}
+            rows={1}
           />
           <button
             onClick={handleSend}

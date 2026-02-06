@@ -121,14 +121,14 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pb-24 sm:pb-6">
       {/* Header */}
-      <div className="border-b border-gray-700 bg-gray-800/30 backdrop-blur-sm">
+      <div className="border-b border-gray-700 bg-gray-800/30 backdrop-blur-sm sticky top-0 z-40">
         <div className="max-w-6xl px-4 mx-auto sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between py-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-4 sm:py-6 gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-white">Dashboard</h1>
-              <p className="mt-1 text-gray-300">
+              <h1 className="text-2xl sm:text-3xl font-bold text-white">Dashboard</h1>
+              <p className="mt-1 text-gray-300 text-sm sm:text-base">
                 Welcome back, {user?.email || 'User'}! Here's your task overview.
               </p>
             </div>
@@ -137,7 +137,7 @@ export default function DashboardPage() {
                 signOut();
                 router.push('/');
               }}
-              className="px-6 py-2 font-medium text-white transition-all duration-200 transform rounded-lg bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+              className="px-4 py-2 sm:px-6 sm:py-2 font-medium text-white transition-all duration-200 transform rounded-lg bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-900 whitespace-nowrap"
             >
               Logout
             </button>
@@ -146,47 +146,47 @@ export default function DashboardPage() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
+      <div className="max-w-6xl px-4 py-6 mx-auto sm:px-6 lg:px-8">
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-3">
-          <div className="p-6 border shadow-lg bg-gradient-to-br from-gray-800/70 to-gray-900/70 backdrop-blur-sm rounded-xl border-gray-700/50">
+        <div className="grid grid-cols-1 gap-4 mb-6 sm:gap-6 sm:mb-8 md:grid-cols-3">
+          <div className="p-4 sm:p-6 border shadow-lg bg-gradient-to-br from-gray-800/70 to-gray-900/70 backdrop-blur-sm rounded-xl border-gray-700/50">
             <div className="flex items-center">
               <div className="p-3 rounded-lg bg-gradient-to-r from-blue-600/30 to-indigo-700/30">
-                <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-400">Total Tasks</p>
-                <p className="text-2xl font-bold text-white">{tasks.length}</p>
+              <div className="ml-3 sm:ml-4">
+                <p className="text-xs sm:text-sm font-medium text-gray-400">Total Tasks</p>
+                <p className="text-xl sm:text-2xl font-bold text-white">{tasks.length}</p>
               </div>
             </div>
           </div>
 
-          <div className="p-6 border shadow-lg bg-gradient-to-br from-gray-800/70 to-gray-900/70 backdrop-blur-sm rounded-xl border-gray-700/50">
+          <div className="p-4 sm:p-6 border shadow-lg bg-gradient-to-br from-gray-800/70 to-gray-900/70 backdrop-blur-sm rounded-xl border-gray-700/50">
             <div className="flex items-center">
               <div className="p-3 rounded-lg bg-gradient-to-r from-green-600/30 to-emerald-700/30">
-                <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-400">Completed</p>
-                <p className="text-2xl font-bold text-white">{tasks.filter(task => task.completed).length}</p>
+              <div className="ml-3 sm:ml-4">
+                <p className="text-xs sm:text-sm font-medium text-gray-400">Completed</p>
+                <p className="text-xl sm:text-2xl font-bold text-white">{tasks.filter(task => task.completed).length}</p>
               </div>
             </div>
           </div>
 
-          <div className="p-6 border shadow-lg bg-gradient-to-br from-gray-800/70 to-gray-900/70 backdrop-blur-sm rounded-xl border-gray-700/50">
+          <div className="p-4 sm:p-6 border shadow-lg bg-gradient-to-br from-gray-800/70 to-gray-900/70 backdrop-blur-sm rounded-xl border-gray-700/50">
             <div className="flex items-center">
               <div className="p-3 rounded-lg bg-gradient-to-r from-amber-600/30 to-orange-700/30">
-                <svg className="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-400">Pending</p>
-                <p className="text-2xl font-bold text-white">{tasks.filter(task => !task.completed).length}</p>
+              <div className="ml-3 sm:ml-4">
+                <p className="text-xs sm:text-sm font-medium text-gray-400">Pending</p>
+                <p className="text-xl sm:text-2xl font-bold text-white">{tasks.filter(task => !task.completed).length}</p>
               </div>
             </div>
           </div>
@@ -194,21 +194,23 @@ export default function DashboardPage() {
 
         {/* Error Message */}
         {error && (
-          <div className="p-4 mb-6 text-red-200 border bg-gradient-to-br from-red-900/50 to-red-800/50 border-red-700/50 rounded-xl backdrop-blur-sm">
+          <div className="p-3 sm:p-4 mb-4 sm:mb-6 text-red-200 border bg-gradient-to-br from-red-900/50 to-red-800/50 border-red-700/50 rounded-xl backdrop-blur-sm">
             <div className="flex items-center">
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span>{error}</span>
+              <span className="text-sm sm:text-base">{error}</span>
             </div>
           </div>
         )}
 
         {/* Task List Section */}
         <div className="overflow-hidden border shadow-xl bg-gradient-to-br from-gray-800/70 to-gray-900/70 backdrop-blur-sm rounded-xl border-gray-700/50">
-          <div className="p-6 border-b border-gray-700/50">
-            <h2 className="text-xl font-semibold text-white">Your Tasks</h2>
-            <p className="mt-1 text-gray-400">Manage and track your daily activities</p>
+          <div className="p-4 sm:p-6 border-b border-gray-700/50">
+            <h2 className="text-lg sm:text-xl font-semibold text-white">Your Tasks</h2>
+            <p className="mt-1 text-gray-400 text-sm sm:text-base">
+              Manage and track your daily activities
+            </p>
           </div>
           <TaskList
             tasks={tasks}

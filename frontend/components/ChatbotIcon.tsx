@@ -23,7 +23,7 @@ export default function ChatbotIcon({ onClick }: ChatbotIconProps) {
   return (
     <button
       onClick={handleClick}
-      className="fixed bottom-6 right-6 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white p-4 rounded-full shadow-xl z-50 transition-all duration-300 transform hover:scale-110 hover:rotate-12 focus:outline-none focus:ring-4 focus:ring-blue-500/50 animate-pulse"
+      className="fixed bottom-6 right-6 sm:bottom-6 sm:right-6 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white p-4 rounded-full shadow-xl z-50 transition-all duration-300 transform hover:scale-110 hover:rotate-12 focus:outline-none focus:ring-4 focus:ring-blue-500/50 animate-pulse"
       aria-label="Open chatbot"
     >
       <div className="relative">

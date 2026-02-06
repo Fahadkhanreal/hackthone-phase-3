@@ -7,6 +7,7 @@ from sqlalchemy import text
 from dotenv import load_dotenv
 from database import engine
 from models import Task
+from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 # Load environment variables
 load_dotenv()
@@ -24,6 +25,30 @@ async def lifespan(app: FastAPI):
 
 # Create FastAPI app
 app = FastAPI(lifespan=lifespan)
+
+# Add Proxy Headers Middleware to handle reverse proxy from Hugging Face Spaces
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.requests import Request
+from starlette.responses import Response
+
+class ProxyHeadersMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        # Check for headers set by reverse proxy
+        forwarded_proto = request.headers.get("x-forwarded-proto")
+        forwarded_host = request.headers.get("x-forwarded-host")
+
+        if forwarded_proto:
+            # Update scheme to reflect the original protocol (https)
+            request.scope["scheme"] = forwarded_proto
+
+        if forwarded_host:
+            # Update server to reflect the original host
+            request.scope.setdefault("server", (forwarded_host, None))
+
+        response = await call_next(request)
+        return response
+
+app.add_middleware(ProxyHeadersMiddleware)
 
 # Add CORS middleware
 app.add_middleware(
