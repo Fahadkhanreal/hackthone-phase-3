@@ -110,7 +110,7 @@ export default function ChatWindow({ isOpen, onClose, userId }: ChatWindowProps)
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-24 right-6 w-full max-w-md h-[500px] sm:h-[600px] bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl shadow-2xl border border-gray-700 flex flex-col z-50 overflow-hidden">
+    <div className="fixed inset-x-0 bottom-0 sm:inset-auto sm:bottom-24 sm:right-6 w-full sm:w-full sm:max-w-md h-[70vh] sm:h-[500px] sm:h-[600px] bg-gradient-to-b from-gray-800 to-gray-900 rounded-t-xl sm:rounded-xl shadow-2xl border border-gray-700 flex flex-col z-50 overflow-hidden">
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-4 rounded-t-xl flex justify-between items-center">
         <h3 className="font-semibold text-lg flex items-center">
@@ -186,7 +186,7 @@ export default function ChatWindow({ isOpen, onClose, userId }: ChatWindowProps)
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask me to manage your tasks..."
-            className="flex-1 bg-gray-700 text-white border border-gray-600 rounded-l-lg p-3 resize-none h-12 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
+            className="flex-1 bg-gray-700 text-white border border-gray-600 rounded-l-lg p-3 resize-none h-12 min-h-[48px] max-h-32 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
             disabled={isLoading}
             rows={1}
           />
